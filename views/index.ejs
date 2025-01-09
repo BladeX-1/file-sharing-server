@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
+
+    
+    <a href="/">Refresh</a> <small>(No auto refresh)</small>
+    <h1>
+        File Sharing
+    </h1>
+    <hr/>
+    <h2>Upload Single file</h2>
+    <form method='post' action='/upload' enctype="multipart/form-data">
+        <input type='file' name='fileUploaded'>
+        <input type='submit'>
+    </form>
+        
+        <!-- <form method="POST" action="/upload" enctype="multipart/form-data">
+            <input multiple type="file" name="files" />
+            <input type="submit" /> -->
+
+    <hr/>
+
+    <form action="/clear" method="post">
+        <h2>
+            Downloads available
+            <button type="submit" name="clear">clear all</button>
+        </h2>
+
+    </form>
+
+    <% if(filesToDownload.length === 0){ %>
+        <div>
+            "No item in the list"
+        </div>
+    <%}%>
+
+    <% for(let item of filesToDownload){ %>
+        <div>
+            <form action=<%="/clear/"+item.downloadId%> method="post">
+                
+                <a href=<%="/download/"+item.downloadId%>>
+                    <strong><%= item.fileName%> </strong>
+                </a>
+                |
+                <button type="submit" name="clear">clear item</button>
+                
+                <br/>
+                
+                <small><strong>downloadId:</strong><%=item.downloadId%> <strong>|</strong></small>
+                
+                <small><strong>fileLocation:</strong><%=item.fileLocation%></small>
+            </form>
+
+        </div>
+        <br/>
+    <%}%>
+
+</body>
+</html>
