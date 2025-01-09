@@ -1,2 +1,5 @@
 node_modules
 cookiesRelated/savedCookies.json
+.env
+env.json
+.gitignore
